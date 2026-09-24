@@ -8,19 +8,26 @@ micro:bit, conectado por USB.
 
 ```
 monitor-microbit/
+├── .github/
+├── README.md
 ├── go.mod
-├── config.json
-├── main.go
+├── go.sum
+├── cmd/
+│   └── monitor/
+│       └── main.go
+├── configs/
+│   └── config.json
 ├── internal/
 │   ├── checker/         -> "¿cómo reviso un servicio?"
 │   ├── config/           -> "¿cómo leo la configuración?"
 │   └── serialcomm/       -> "¿cómo le hablo al micro:bit?"
+├── testing/
 └── microbit/
     └── main.py           -> firmware MicroPython del micro:bit
 ```
 
 Los tres paquetes de `internal/` no dependen entre sí: `checker` no sabe que
-existe `serialcomm`, y viceversa. `main.go` es el único que los conoce a
+existe `serialcomm`, y viceversa. `cmd/monitor/main.go` es el único que los conoce a
 todos y los conecta. Esto es justamente lo que pide la consigna de
 "arquitectura modular": se puede agregar un nuevo tipo de chequeo (por
 ejemplo, una base de datos PostgreSQL) creando un archivo nuevo en
@@ -95,12 +102,12 @@ permisos especiales del navegador.
 2. Desplegar **Puertos (COM y LPT)**.
 3. Va a aparecer algo como `mbed Serial Port (COM3)`. Ese `COM3` (el
    número puede variar) es el valor que van a poner en `serial_port`
-   dentro de `config.json`.
+   dentro de `configs/config.json`.
 
 Si tienen dudas de cuál es, pueden desconectar el micro:bit, ver qué
 puertos hay, volver a conectarlo y ver cuál apareció nuevo.
 
-## Configurar `config.json`
+## Configurar `configs/config.json`
 
 - `serial_port`: el `COMx` que encontraron en el Administrador de
   dispositivos (ej. `"COM3"`).
@@ -111,7 +118,7 @@ puertos hay, volver a conectarlo y ver cuál apareció nuevo.
 ## Correr el programa
 
 ```powershell
-go run . config.json
+go run ./cmd/monitor configs/config.json
 ```
 
 Van a ver logs como:
@@ -151,7 +158,7 @@ un puerto TCP abierto, ambos en `127.0.0.1`.
 
    ```powershell
    cd monitor-microbit
-   go run . testing\config.test.json
+   go run ./cmd/monitor testing\config.test.json
    ```
 
    Ese config ya incluye casos de `OK` (contra el testserver) y de
@@ -185,7 +192,7 @@ envío serial sigue siendo con el micro:bit real conectado.
 ## Guía de pruebas de punta a punta
 
 1. **Probar cada checker por separado.** Antes de conectar el micro:bit,
-   corran el programa con un solo servicio en `config.json` (por ejemplo
+   corran el programa con un solo servicio en `configs/config.json` (por ejemplo
    solo el `http`) apuntando a algo que sepan que funciona (ej.
    `https://example.com`) y revisen que el log diga `OK`. Después apunten a
    una URL que no exista para confirmar que da `ERROR`, y para forzar un
@@ -222,9 +229,9 @@ envío serial sigue siendo con el micro:bit real conectado.
    cambia de ícono cada vez. Ojo: mientras PuTTY tenga el puerto COM
    abierto, el programa en Go no va a poder conectarse (un puerto serial
    solo lo puede usar un programa a la vez), así que cierren PuTTY antes
-   de volver a correr `go run .`.
+   de volver a correr `go run ./cmd/monitor configs/config.json`.
 
-5. **Prueba end-to-end completa:** correr `go run . config.json` con el
+5. **Prueba end-to-end completa:** correr `go run ./cmd/monitor configs/config.json` con el
    micro:bit conectado y varios servicios reales. Ir apagando/desconectando
    servicios uno por uno mientras el programa corre, y verificar en vivo
    que tanto los logs como el ícono en el micro:bit cambian en el

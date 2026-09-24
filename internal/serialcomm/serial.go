@@ -49,7 +49,7 @@ func (m *Manager) connect() error {
 // intenta reconectar automáticamente antes de escribir. Si la escritura
 // falla, se cierra y se descarta el puerto para forzar una reconexión en
 // el próximo ciclo de polling — así no hace falta un loop de reintento
-// separado, el propio ticker de main.go actúa como reintento.
+// separado, el propio ticker de cmd/monitor/main.go actúa como reintento.
 func (m *Manager) SendStatus(code byte) error {
 	m.mu.Lock()
 	defer m.mu.Unlock()

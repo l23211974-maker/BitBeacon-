@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	cfgPath := "config.json"
+	cfgPath := "configs/config.json"
 	if len(os.Args) > 1 {
 		cfgPath = os.Args[1]
 	}
@@ -30,7 +30,7 @@ func main() {
 
 	checkers := buildCheckers(cfg)
 	if len(checkers) == 0 {
-		log.Fatal("no hay servicios configurados en config.json")
+		log.Fatal("no hay servicios configurados en el archivo de configuración")
 	}
 
 	serialMgr := serialcomm.NewManager(cfg.SerialPort, cfg.BaudRate, log.Default())
