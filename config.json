@@ -1,0 +1,11 @@
+{
+  "poll_interval": "10s",
+  "serial_port": "COM10",
+  "baud_rate": 115200,
+  "services": [
+    { "type": "http",   "name": "API principal",   "target": "https://example.com/health", "timeout_seconds": 3 },
+    { "type": "docker", "name": "Contenedor DB",    "target": "mi_contenedor_postgres",     "timeout_seconds": 3 },
+    { "type": "tcp",    "name": "NAS (SMB)",        "target": "192.168.1.10:445",           "timeout_seconds": 3 },
+    { "type": "ping",   "name": "Router",           "target": "192.168.1.1",                "timeout_seconds": 2 }
+  ]
+}

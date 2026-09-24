@@ -1,0 +1,10 @@
+{
+  "poll_interval": "1s",
+  "serial_port": "COM10",
+  "baud_rate": 115200,
+  "services": [
+    { "type": "http", "name": "HTTP-OK (testserver)", "target": "http://127.0.0.1:8090/health", "timeout_seconds": 2 },
+    { "type": "tcp",  "name": "TCP-OK (testserver)",  "target": "127.0.0.1:9090", "timeout_seconds": 2 },
+    { "type": "ping", "name": "PING-OK (localhost)",  "target": "127.0.0.1", "timeout_seconds": 2 }
+  ]
+}
