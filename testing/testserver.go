@@ -12,7 +12,7 @@
 //   - Un endpoint HTTP de salud en http://127.0.0.1:8090/health (responde 200 OK)
 //   - Un puerto TCP abierto en 127.0.0.1:9090 (para probar el checker "tcp", ej. NAS)
 //
-// Apunten su config.json de pruebas a estos dos servicios para ver los
+// Apunten su config de pruebas (por ejemplo testing/config.test.json) a estos dos servicios para ver los
 // checkers de HTTP y TCP dar estado OK. Para ver ERROR, apunten a un
 // puerto donde NO tengan nada corriendo (ej. 127.0.0.1:9999). Para ver
 // UNKNOWN, apunten el checker de tipo "ping" a una IP no ruteable de su

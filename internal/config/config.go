@@ -1,4 +1,4 @@
-// Package config se encarga de leer config.json y convertirlo a structs Go.
+// Package config se encarga de leer archivos de configuración JSON y convertirlos a structs Go.
 package config
 
 import (
@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-// ServiceConfig describe un servicio a monitorear, tal como viene en config.json.
+// ServiceConfig describe un servicio a monitorear, tal como viene en el JSON de configuración.
 type ServiceConfig struct {
 	Type           string `json:"type"` // "http" | "docker" | "tcp" | "ping"
 	Name           string `json:"name"`

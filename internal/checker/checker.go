@@ -28,7 +28,7 @@ type Result struct {
 
 // Checker es la interfaz que deben cumplir todos los "chequeadores".
 // Check recibe un context.Context para poder cancelar/limitar por timeout
-// desde afuera (por ejemplo, desde main.go).
+// desde afuera (por ejemplo, desde cmd/monitor/main.go).
 type Checker interface {
 	Name() string
 	Check(ctx context.Context) Result
