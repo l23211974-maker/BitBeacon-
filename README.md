@@ -243,12 +243,3 @@ envío serial sigue siendo con el micro:bit real conectado.
    conectarlo: en el siguiente ciclo, `SendStatus` detecta que `m.port` es
    `nil` y reabre el puerto solo, sin reiniciar el programa de Go.
 
-## Ideas de extensión (para la exposición, si sobra tiempo)
-
-- Mandar un byte de "servicio" además del de "estado", y que el micro:bit
-  cicle entre los últimos N estados recibidos.
-- Reemplazar `DockerChecker` (que usa el CLI) por uno que hable directo
-  con la Docker Engine API vía su socket Unix, sin depender de que el
-  comando `docker` esté en el PATH.
-- Usar el botón A/B del micro:bit para pedir un refresco inmediato,
-  mandando un byte desde el micro:bit hacia la PC (comunicación bidireccional).
